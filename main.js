@@ -1,6 +1,7 @@
 import { getCityInfo, getWeatherByTime } from "./fetch.js";
 import { setFavoriteCity, removeFavoriteCity } from "./local.storage.js";
 import { storageArray } from "./local.storage.js";
+import { format } from 'date-fns'
 
 const inputSearch = document.querySelector('.search-sity-input')
 const inputButton = document.querySelector('.search-sity-button')
@@ -13,9 +14,10 @@ const sunsSunr = document.querySelector('.show-feels-like')
 const feelsLike = document.querySelectorAll('div.feels-like')
 const feelsLikeMini = document.querySelector('.mini-block')
 const imgBg = document.querySelector('.image-background')
+const formatedData = format(new Date(), "MM/dd/yyyy")
 let index
 
-console.log(storageArray);
+console.log(formatedData);
 
 if (localStorage.getItem('city') !== null) {
     renderOnLoadHTML(storageArray, index)
