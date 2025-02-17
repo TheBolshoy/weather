@@ -3,6 +3,11 @@ import { setFavoriteCity, removeFavoriteCity } from "./local.storage.js";
 import { storageArray } from "./local.storage.js";
 import { format } from 'date-fns'
 
+
+
+
+let st = Date.now()
+let index
 const inputSearch = document.querySelector('.search-sity-input')
 const inputButton = document.querySelector('.search-sity-button')
 const temperature = document.querySelector('.show-weather-block-temp')
@@ -14,17 +19,19 @@ const sunsSunr = document.querySelector('.show-feels-like')
 const feelsLike = document.querySelectorAll('div.feels-like')
 const feelsLikeMini = document.querySelector('.mini-block')
 const imgBg = document.querySelector('.image-background')
-const formatedData = format(new Date(), "MM/dd/yyyy")
-let index
+const clock = document.querySelector('.clock')
 
-console.log(formatedData);
-
-if (localStorage.getItem('city') !== null) {
-    renderOnLoadHTML(storageArray, index)
-}
 
 inputButton.addEventListener('click', getJSONWeather)
 likeSity.addEventListener('click', createHTMLList)
+
+window.onload = function() {
+    window.setInterval(function() {
+        clock.innerHTML = format(new Date(), "hh:mm:ss")
+    }, 1000)
+}
+
+
 
 
 function getJSONWeather(event) {
@@ -129,8 +136,6 @@ function renderForecast(forecastList, index = 0) {
 
     renderForecast(forecastList, index + 1)
 }
-
-//отрисовка при загрузке программы
 function arrayToHTML(city) {
 
     const liElement = document.createElement('li')
@@ -155,7 +160,6 @@ function arrayToHTML(city) {
     liElement.appendChild(pElement)
     liElement.appendChild(closeButton)
 }
-
 function createHTMLList() {
     let cityActiveName = cityActive.textContent
     if (storageArray.includes(cityActiveName)) {
@@ -169,16 +173,10 @@ function createHTMLList() {
 }
 
 
-
-function createHTMLbgIMG(data) {
-    imgBg.textContent = ''
-    let iconJSON = data.weather[0].icon
-
-    let img = document.createElement('img')
-    img.setAttribute('class', 'img-bg')
-    img.setAttribute('src', `http://openweathermap.org/img/wn/${iconJSON}@4x.png`)
-    imgBg.appendChild(img)
+if (localStorage.getItem('city') !== null) {
+    renderOnLoadHTML(storageArray, index)
 }
+
 function getTime(timestamp) {
     let date = new Date(timestamp * 1000);
     const h = date.getHours().toString().padStart(2, "0");
@@ -191,3 +189,12 @@ function resetSunsSunr() {
     })
     sunsSunr.innerHTML = ''
 }
+
+
+
+
+
+
+
+let timeLoading = Date.now() - st
+console.log(`Врeмя загрузки странциы: ${timeLoading} msec`)

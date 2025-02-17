@@ -1,6 +1,13 @@
 @font-face {
     font-family: 'Heebo';
     src: url('fonts/Heebo-Light.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Heebo';
+    src: url('fonts/Heebo-thin.woff') format('woff2');
     font-weight: 300;
     font-style: normal;
     font-display: swap;
@@ -277,7 +284,16 @@ p {
 
 
 
+.clock-block {
+    margin-top: 50px;
+    display: flex;
+    justify-self: center;
+}
 
+.clock {
+    font-weight: 300;
+    font-size: 40px;
+}
 
 
 .image-background {

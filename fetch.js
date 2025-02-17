@@ -1,6 +1,4 @@
-const start = () => {
-    return Date.now()
-}
+
 
 
 
@@ -63,8 +61,3 @@ export async function getWeatherByTime(cityName) {
 
 
 
-const end = () => {
-    return Date.now()
-}
-let timeLoading = end() - start()
-console.log(`Врeмя выполнения fetch: ${timeLoading} msec`)
