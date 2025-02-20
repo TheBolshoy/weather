@@ -2,6 +2,7 @@ import { getCityInfo, getWeatherByTime } from "./fetch.js";
 import { setFavoriteCity, removeFavoriteCity } from "./local.storage.js";
 import { storageArray } from "./local.storage.js";
 import { format } from 'date-fns'
+import {  } from 'js-cookie'
 
 
 
@@ -21,7 +22,6 @@ const feelsLikeMini = document.querySelector('.mini-block')
 const clock = document.querySelector('.clock-title')
 const tempTitle = document.querySelector('.temp-title')
 const dateTitle = document.querySelector('.date-title')
-const cityTitle = document.querySelector('.city-title')
 
 
 inputButton.addEventListener('click', getJSONWeather)

@@ -2,7 +2,7 @@
 export let storageArray = localStorage.getItem('city') === null ? [] : Array.from(localStorage.getItem('city').split(','))
 
 if (storageArray.includes('')) {
-   storageArray = storageArray.filter((elem) => elem !== '')
+    storageArray = storageArray.filter((elem) => elem !== '')
 }
 
 
@@ -19,7 +19,6 @@ export function removeFavoriteCity(cityDelete) {
     storageArray = storageArray.filter((elem) => elem !== cityDelete)
     localStorage.setItem('city', storageArray)
 }
-
 
 
 
