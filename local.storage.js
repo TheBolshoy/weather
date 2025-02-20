@@ -10,7 +10,7 @@ export function setFavoriteCity(cityFav) {
     if (storageArray === '') {
         storageArray.removeItem('city')
     }
-    storageArray.push(cityFav)
+    storageArray.push(encodeURIComponent(cityFav))
     let set = new Set(storageArray)
     localStorage.setItem('city', Array.from(set.values()))
 }

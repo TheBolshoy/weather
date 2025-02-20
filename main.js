@@ -18,7 +18,6 @@ const weatherIcon = document.querySelector('.img-icon')
 const sunsSunr = document.querySelector('.show-feels-like')
 const feelsLike = document.querySelectorAll('div.feels-like')
 const feelsLikeMini = document.querySelector('.mini-block')
-const imgBg = document.querySelector('.image-background')
 const clock = document.querySelector('.clock')
 
 
@@ -76,7 +75,6 @@ function createHTML(data) {
     sunset.textContent = `Sunset: ${time2}`
     sunsSunr.appendChild(sunset)
 
-    createHTMLbgIMG(data)
 }
 function addHTMLforMiniBlock(time, temp, feelsLike) {
 
