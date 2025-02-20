@@ -18,18 +18,23 @@ const weatherIcon = document.querySelector('.img-icon')
 const sunsSunr = document.querySelector('.show-feels-like')
 const feelsLike = document.querySelectorAll('div.feels-like')
 const feelsLikeMini = document.querySelector('.mini-block')
-const imgBg = document.querySelector('.image-background')
-const clock = document.querySelector('.clock')
+const clock = document.querySelector('.clock-title')
+const tempTitle = document.querySelector('.temp-title')
+const dateTitle = document.querySelector('.date-title')
+const cityTitle = document.querySelector('.city-title')
 
 
 inputButton.addEventListener('click', getJSONWeather)
 likeSity.addEventListener('click', createHTMLList)
 
+renderTitle()
 window.onload = function() {
     window.setInterval(function() {
-        clock.innerHTML = format(new Date(), "hh:mm:ss")
+        clock.textContent = format(new Date(), "hh:mm:ss")
+        dateTitle.textContent =format(new Date(), "dd.MM.yy")
     }, 1000)
 }
+
 
 
 
@@ -42,6 +47,16 @@ function getJSONWeather(event) {
     const responseJSONForecast = getWeatherByTime(cityName)
     responseJSONForecast.then((data) => showForecast(data))
     inputSearch.value = ''
+}
+function renderTitle() {
+    const responseJSon = getCityInfo('Vladikavkaz')
+    responseJSon.then((data) => createTitleHTML(data))
+}
+
+function createTitleHTML(data) {
+    let faringeitJSON = Math.round(data.main.temp - 273.15);
+    tempTitle.textContent = `${faringeitJSON}°`
+
 }
 function showForecast(data) {
     feelsLikeMini.textContent = ''
@@ -75,8 +90,6 @@ function createHTML(data) {
     sunset.setAttribute('class', 'suns')
     sunset.textContent = `Sunset: ${time2}`
     sunsSunr.appendChild(sunset)
-
-    createHTMLbgIMG(data)
 }
 function addHTMLforMiniBlock(time, temp, feelsLike) {
 
