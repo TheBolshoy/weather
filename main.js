@@ -1,6 +1,7 @@
 import { getCityInfo, getWeatherByTime } from "./fetch.js";
-import { setFavoriteCity, removeFavoriteCity } from "./local.storage.js";
-import { storageArray } from "./local.storage.js";
+//import { setFavoriteCity, removeFavoriteCity } from "./local.storage.js";
+//import { storageArray } from "./local.storage.js";
+import { arrStorage, names } from "./class.js"
 import { format } from 'date-fns'
 import {  } from 'js-cookie'
 
@@ -124,16 +125,16 @@ function displayOnListClick(cityName) {
     const responseJSONForecast = getWeatherByTime(cityName)
     responseJSONForecast.then((data) => showForecast(data))
 }
-function renderOnLoadHTML(storageArray, index = 0) {
-    let element = storageArray[index]
+function renderOnLoadHTML(arrStorage, index = 0) {
+    let element = arrStorage[index]
 
-    if (index === storageArray.length) {
+    if (index === arrStorage.length) {
         return
     }
     arrayToHTML(element)
     displayOnListClick(element)
 
-    renderOnLoadHTML(storageArray, index + 1)
+    renderOnLoadHTML(arrStorage, index + 1)
 }
 function renderForecast(forecastList, index = 0) {
     let element = forecastList[index]
@@ -166,7 +167,7 @@ function arrayToHTML(city) {
     closeButton.addEventListener('click', (event) => {
         event.target.parentElement.remove()
         const targetName = event.target.parentNode.innerText
-        removeFavoriteCity(targetName)
+        names.clear(targetName)
     })
 
     locationsUl.appendChild(liElement)
@@ -175,19 +176,19 @@ function arrayToHTML(city) {
 }
 function createHTMLList() {
     let cityActiveName = cityActive.textContent
-    if (storageArray.includes(cityActiveName)) {
+    if (arrStorage.includes(cityActiveName)) {
         return
-    } else if (storageArray === '') {
+    } else if (arrStorage === '') {
         return
     } else {
-        setFavoriteCity(cityActiveName)
+        names.set(cityActiveName)
         arrayToHTML(cityActiveName)
     }
 }
 
 
 if (localStorage.getItem('city') !== null) {
-    renderOnLoadHTML(storageArray, index)
+    renderOnLoadHTML(arrStorage, index)
 }
 
 function getTime(timestamp) {
